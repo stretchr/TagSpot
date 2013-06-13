@@ -9,13 +9,16 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
+#import <Stretchr/Stretchr.h>
 
-@interface TagSpot : NSObject <MKAnnotation>
+@interface TagSpot : NSObject <MKAnnotation, StretchrPersistableObject>
 
 @property (strong, nonatomic) CLLocation *location;
 @property (copy, nonatomic) NSString *tagText;
 
 - (CLLocationCoordinate2D) coordinate;
 - (NSString *)title;
+
+- (id)initWithDictionaryRepresentation:(NSDictionary*) dictionary;
 
 @end

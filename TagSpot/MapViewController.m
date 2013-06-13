@@ -8,6 +8,7 @@
 
 #import "MapViewController.h"
 #import "TagSpot.h"
+#import "TagTalker.h"
 
 @interface MapViewController ()
 
@@ -33,7 +34,11 @@
     
   [self.mapView setUserTrackingMode:MKUserTrackingModeFollowWithHeading];
   
-  NSLog(@"TODO: load tags");
+  [TagTalker fetchTagSpots:^(NSArray* tagSpots) {
+    for (TagSpot* tagSpot in tagSpots) {
+    [self.mapView addAnnotation:tagSpot];
+    }   
+  }];
   
 }
 
@@ -84,7 +89,7 @@
   [self.mapView addAnnotation:tagSpot];
   
   // save this somewhere
-  NSLog(@"TODO: Save this new tag");
+  [TagTalker persistTagSpot:tagSpot];
   
   // clear the text box
   [self.tagTextBox setText:@""];

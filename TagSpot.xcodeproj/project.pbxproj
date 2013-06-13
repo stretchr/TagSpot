@@ -22,6 +22,7 @@
 		0580C7CC176939AD007ED82F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0580C7CB176939AD007ED82F /* CoreLocation.framework */; };
 		0580C7D117693DFF007ED82F /* TagSpot.m in Sources */ = {isa = PBXBuildFile; fileRef = 0580C7D017693DFF007ED82F /* TagSpot.m */; };
 		2E0D010150074E9998F8FB38 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA93297184414F0494A9D923 /* libPods.a */; };
+		7196C8A0176A245D007D4BEF /* TagTalker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7196C89F176A245D007D4BEF /* TagTalker.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,8 @@
 		0580C7CF17693DFF007ED82F /* TagSpot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagSpot.h; sourceTree = "<group>"; };
 		0580C7D017693DFF007ED82F /* TagSpot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagSpot.m; sourceTree = "<group>"; };
 		40E7B068F7464396A4548947 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		7196C89E176A245D007D4BEF /* TagTalker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagTalker.h; sourceTree = "<group>"; };
+		7196C89F176A245D007D4BEF /* TagTalker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagTalker.m; sourceTree = "<group>"; };
 		BA93297184414F0494A9D923 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -100,6 +103,7 @@
 		05233603176936B100974636 /* TagSpot */ = {
 			isa = PBXGroup;
 			children = (
+				7196C89D176A244B007D4BEF /* Stretchr */,
 				0580C7CE17693DEA007ED82F /* Data */,
 				0580C7C317693836007ED82F /* ViewControllers */,
 				0523360C176936B100974636 /* AppDelegate.h */,
@@ -140,6 +144,15 @@
 				0580C7D017693DFF007ED82F /* TagSpot.m */,
 			);
 			name = Data;
+			sourceTree = "<group>";
+		};
+		7196C89D176A244B007D4BEF /* Stretchr */ = {
+			isa = PBXGroup;
+			children = (
+				7196C89E176A245D007D4BEF /* TagTalker.h */,
+				7196C89F176A245D007D4BEF /* TagTalker.m */,
+			);
+			name = Stretchr;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,6 +258,7 @@
 				0523360E176936B100974636 /* AppDelegate.m in Sources */,
 				0580C7C717693860007ED82F /* MapViewController.m in Sources */,
 				0580C7D117693DFF007ED82F /* TagSpot.m in Sources */,
+				7196C8A0176A245D007D4BEF /* TagTalker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
