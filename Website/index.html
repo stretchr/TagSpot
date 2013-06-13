@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <title>TagSpot</title>
+  </head>
+  <body>
+
+    <h1>
+      TagSpot: Tag the world
+    </h1>
+    <div id="map_canvas" style="width:100%;height:500px"></div>
+
+    <div>
+      Learn more about TagSpot by visiting <a href="http://github.com/stretchr/TagSpot">the TagSpot Github repository</a>.
+    </div>
+
+    <script src="https://rawgithub.com/stretchrcom/sdk-js/master/src/stretchr.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZRPnAoB4IceS_8axaSKCxCziYbCgT21A&amp;sensor=false"></script>
+    <script>
+
+      var map;
+      var infowindow;
+
+      function addItemToMap(item) {
+
+        var googleLocation = new google.maps.LatLng(item.location.lat, item.location.lng);
+
+        var marker = new google.maps.Marker({
+          position: googleLocation,
+          map: map,
+          animation: google.maps.Animation.DROP
+        });
+
+        var tag = item.title;
+
+        // add the info window showing the title
+        google.maps.event.addListener(marker, "click", function(){
+
+          if (infowindow) {
+            infowindow.close();
+          } else {
+            infowindow = new google.maps.InfoWindow({
+              size: new google.maps.Size(100, 200)
+            });
+          }
+
+          infowindow.setContent("<h2>" + tag + "</h2>");
+          infowindow.open(map,marker);
+
+        });
+
+      }
+
+      (function($){
+        $(function(){
+
+          // make a map
+          map = new google.maps.Map(document.getElementById("map_canvas"), {
+            center: new google.maps.LatLng(40.01601711804619, -105.2490574057836),
+            zoom: 12,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            backgroundColor: "#ddd"
+          });
+
+          // add a test item
+          addItemToMap({
+            title: "My tag",
+            location: {
+              lat: 40.01601711804619, lng: -105.2490574057836
+            }
+          });
+
+        });
+      })(jQuery);
+
+    </script>
+
+  </body>
+</html>
