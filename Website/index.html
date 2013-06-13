@@ -19,7 +19,13 @@
     <script>
 
       var map;
+      var bounds = new google.maps.LatLngBounds();
       var infowindow;
+      var stretchr = Stretchr.NewSession(
+				  "tagspot.demo",
+				  "KflksDr2j2BGU04WyiuZk6LPIbIJWpcH",
+				  "1J6q8JFIgDsgVaUs55J7uDSI2aSnIupd"
+				);
 
       function addItemToMap(item) {
 
@@ -49,6 +55,8 @@
 
         });
 
+        bounds.extend(googleLocation);
+			  map.fitBounds(bounds);
       }
 
       (function($){
@@ -62,14 +70,27 @@
             backgroundColor: "#ddd"
           });
 
-          // add a test item
-          addItemToMap({
-            title: "This is hardcoded test tag",
-            location: {
-              lat: 40.01601711804619, lng: -105.2490574057836
-            }
-          });
+					// fetch tags from stretchr and add them
+					stretchr.at("tags").readAll({
+				    onCompleted: function(r) {
 
+				      console.info(r)
+
+				      if (r["~d"]["~c"] > 0) {
+
+				        tagSpots = r["~d"]["~i"];
+
+				        for (var i = tagSpots.length - 1; i >= 0; i--) {
+				        	 addItemToMap({
+				            title: tagSpots[i]["tagText"],
+				            location: {
+				              lat: tagSpots[i]["lat"], lng: tagSpots[i]["lng"]
+				            }
+				          });
+				        };
+				      }
+				    }
+				  });
         });
       })(jQuery);
 
