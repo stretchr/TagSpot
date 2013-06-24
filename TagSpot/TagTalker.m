@@ -15,6 +15,7 @@
 @implementation TagTalker
 
 static Stretchr* session = nil;
+static NSString* resourcePath = @"people/tyler/tags";
 
 + (void)initialize
 {
@@ -22,29 +23,33 @@ static Stretchr* session = nil;
 }
 
 + (void)fetchTagSpots:(void(^)(NSArray*))callback {
+  
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    
     __block NSMutableArray* tagSpots = [NSMutableArray array];
-    StretchrResourceCollection* collection = [StretchrResourceCollection resourceCollectionWithBasePath:@"tags"];
+    
+    StretchrResourceCollection* collection = [StretchrResourceCollection resourceCollectionWithBasePath:resourcePath];
     [session readResourceCollection:collection withCompletionBlock:^(StretchrResourceCollection *resourceCollection, NSError *error) {
       if (error == nil)
-      {
-        NSLog(@"load successful");
-        for (StretchrResource* dict in [resourceCollection resources]) {
-          [tagSpots addObject:[[TagSpot alloc] initWithDictionaryRepresentation:[dict data]]];
+      {        
+        for (StretchrResource* resource in [resourceCollection resources]) {
+          [tagSpots addObject:[[TagSpot alloc] initWithDictionaryRepresentation:[resource data]]];
         }
       }
     }];
+    
     callback([NSArray arrayWithArray:tagSpots]);
+    
   });
 }
 
 + (void)persistTagSpot:(TagSpot*)tagSpot {
+  
+  
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    [session createResourceWithPath:@"tags" data:tagSpot completionBlock:^(StretchrResource *resource, NSError *error) {
-      if (error == nil) {
-        NSLog(@"push successful");
-      }
-    }];
+        
+    [session createResourceWithPath:resourcePath data:tagSpot completionBlock:nil];
+    
   });
 }
 
